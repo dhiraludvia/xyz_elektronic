@@ -1,7 +1,14 @@
 <?xml version="1.0" ?>
 <odoo>
     <data>
-        
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value
+                    eval="[('module', '=', 'stock'), ('name', '=', 'stock_picking_rule')]" />
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+
         <record id="stock.group_stock_user" model="res.groups">
             <field name="name">Inventory Customer</field>
             <field name="category_id" ref="base.module_category_inventory_inventory"/>
@@ -20,6 +27,26 @@
             <field name="category_id" ref="base.module_category_inventory_inventory"/>
             <field name="users" eval="[(4, ref('base.user_root')),(4, ref('base.user_admin'))]"/>
         </record>
+
+        <record model="ir.rule" id="stock.stock_picking_rule">
+            <field name="name">Customer can only see his/her record</field>
+            <field name="model_id" search="[('model','=','stock.picking')]" model="ir.model"/>
+            <field name="groups" eval="[(4, ref('stock.group_stock_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="domain_force">['|',('company_id', 'in', company_ids),('user_id', '=', user.id)]</field>
+        </record>
+
+        <!-- Revoke noupdate change -->
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value
+                    eval="[('module', '=', 'stock'), ('name', '=', 'stock_picking_rule')]" />
+            </function>
+            <value eval="{'noupdate': True}" />
+        </function>
 
     </data>
 </odoo>

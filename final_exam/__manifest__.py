@@ -17,6 +17,7 @@
         'security/security_inventory.xml',
         'views/edit_sales.xml',
         'views/edit_purchase.xml',
+        'views/edit_inventory.xml',
     ],
 
 }
