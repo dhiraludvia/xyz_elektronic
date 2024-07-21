@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="report_inventory_bookingwz_view_form" model="ir.ui.view">
+        <field name="name">report.inventory.bookingwz.view.form</field>
+        <field name="model">report.inventory.bookingwz</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="from_date"/>
+                        <field name="to_date"/>                        
+                    </group>
+                    <footer>
+                        <button name="action_inventory_booking_report"
+                            string="Print Report"
+                            type="object"
+                            class="btn btn-primary"
+                        />
+                        <button string="Cancel"
+                            special="cancel"
+                            class="btn btn-warning"
+                        />
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="report_inventory_bookingwz_action" model="ir.actions.act_window">
+        <field name="name">Inventory Booking Report Wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">report.inventory.bookingwz</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="report_inventory_bookingwz_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="report_inventory_bookingwz_menu_act" 
+        name="Inventory Booking Report Wizard" 
+        parent="stock_picking_menu_act" 
+        action="report_inventory_bookingwz_action" 
+        sequence="30"/>
+
+</odoo>
+

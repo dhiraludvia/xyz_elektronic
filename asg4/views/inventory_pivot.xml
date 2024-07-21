@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_inventory_booking_order_pivot" model="ir.ui.view">
+        <field name="name">Inventory Booking Order Pivot</field>
+        <field name="model">inventory.booking.pivot</field>
+        <field name="arch" type="xml">
+            <pivot string="Inventory Booking Order Pivot">
+                <field name="partner_id" type="col"/>
+                <field name="date_order" type="row"/>
+                <field name="amount_total" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_inventory_booking_order_pivot" model="ir.actions.act_window">
+        <field name="name">Inventory Booking Order Pivot</field>
+        <field name="res_model">inventory.booking.pivot</field>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="view_inventory_booking_order_pivot"/>
+    </record>
+
+    <menuitem id="menu_inventory_booking_order_pivot"
+              name="Inventory Booking Order (Query)"
+              parent="stock_picking_menu_act"
+              action="action_inventory_booking_order_pivot"
+              sequence="20"/>
+
+</odoo>

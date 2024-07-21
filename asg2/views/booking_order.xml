@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form -->
+    <record id="booking_order_view_form_inherit" model="ir.ui.view">
+        <field name="name">Booking Order</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="is_booking"/>
+            </xpath>
+            <xpath expr="//tree/field[@name='product_uom_qty']" position="after">
+                <field name="qty_booking" required="1"/>
+            </xpath>
+            <xpath expr="//button[@name='action_quotation_send']" position="after">
+                    <button name="action_convert_to_rfq" string="Request For Quotation" type="object" class="oe_highlight" states="booking"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- search -->
+    <record id="booking_order_view_search" model="ir.ui.view">
+        <field name="name">booking_order_view_search</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+              <xpath expr="//filter[@name='my_sale_orders_filter']" position="after">
+                <filter string="Booking Orders Today" name="booking_order_today" domain="[('date_order', '&lt;', (time.strftime('%%Y-%%m-%%d 23:59:59')))]"/>
+                <filter string="Last 3 Days" name="filter_last_3_days" domain="[('date_order', '&gt;=', (datetime.datetime.today() + datetime.timedelta(days=3)))]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- action -->
+    <record id="booking_order_action" model="ir.actions.act_window">
+        <field name="name">Booking Order</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_booking','=',True)]</field>
+        <field name="context">{'default_is_booking': True,'search_default_booking_order_today':1}</field>
+    </record>
+
+    <menuitem id="booking_order_menu_act" 
+        name="Booking Order" 
+        parent="sale.sale_menu_root" 
+        action="booking_order_action" 
+        sequence="10"/>
+
+</odoo>

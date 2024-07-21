@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_inventory_booking" model="ir.actions.report">
+            <field name="name">Inventory Booking Order</field>
+            <field name="model">stock.picking</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">asg4.report_inventory_booking_id</field>
+            <field name="report_file">asg4.report_inventory_booking_id</field>
+            <field name="print_report_name">'Inventory Booking - %s - %s' % (object.partner_id.name or '', object.name)</field>
+            <field name="binding_model_id" ref="model_stock_picking"/>
+            <field name="binding_type">report</field>
+    </record>
+
+    <record id="action_report_inventory_bookingwz" model="ir.actions.report">
+        <field name="name">Inventory Booking Order Wizard</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">asg4.report_inventory_bookingwz_pdf</field>
+        <field name="report_file">asg4.report_inventory_bookingwz_pdf</field>
+        <field name="binding_model_id" ref="model_stock_picking"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="action_report_inventory_booking_xlsx" model="ir.actions.report">
+        <field name="name">Inventory Booking Order XLSX</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">asg4.report_inventory_booking_xlsx</field>
+        <field name="report_file">asg4.report_inventory_booking_xlsx</field>
+        <field name="print_report_name">'Inventory Booking Xlsx - %s - %s' % (object.partner_id.name or '', object.name)</field>
+        <field name="binding_model_id" ref="model_stock_picking"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+</odoo>

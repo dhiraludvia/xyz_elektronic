@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="booking_order_sequence" model="ir.sequence">
+        <field name="name">Referensi Booking Order</field>
+        <field name="code">referensi.bookingorder</field>
+        <field name="prefix">BO-</field>
+        <field name="padding">4</field>
+        <field name="suffix"></field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+
+</odoo>

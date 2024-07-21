@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- action -->
+    <record id="history_booking_order_action" model="ir.actions.act_window">
+        <field name="name">History Booking Order</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_booking','=',True)]</field>
+        <field name="context"></field>
+    </record>
+
+    <menuitem id="history_booking_order_menu_act" 
+        name="History Booking Order" 
+        parent="sale.sale_menu_root" 
+        action="history_booking_order_action" 
+        sequence="11"/>
+
+</odoo>

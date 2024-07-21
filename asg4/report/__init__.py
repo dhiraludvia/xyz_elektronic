@@ -1,0 +1,2 @@
+from . import report_inventory_bookingwz_xlxs
+from . import report_inventory_booking_xlsx
