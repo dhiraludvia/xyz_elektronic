@@ -18,7 +18,7 @@
         'views/edit_inventory.xml',
         'views/inventory_pivot.xml',
         'wizard/inventory_bookingwz.xml',
-        'wizard/inventory_bookingwz_xlsx.xml',
+        # 'wizard/inventory_bookingwz_xlsx.xml',
         'report/report.xml',
         'report/report_inventory_booking_template.xml',
         'report/report_inventory_bookingwz_pdf.xml',

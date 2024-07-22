@@ -11,13 +11,16 @@
                                 <tr>
                                     <th style="border: 1px solid #ddd; padding: 8px;">No. Booking Order:</th>
                                     <th style="border: 1px solid #ddd; padding: 8px;">Scheduled Date</th>
+                                    <th style="border: 1px solid #ddd; padding: 8px;">Source Document</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <t t-foreach="docs" t-as="line">
+                                <t t-set="sorted_generate_report" t-value="sorted(generate_report, key=lambda l: l['scheduled_date'])"/>
+                                <t t-foreach="sorted_generate_report" t-as="line">
                                     <tr>
-                                        <td><span t-field="line.origin"/></td>
-                                        <td><span t-field="line.scheduled_date"/></td>
+                                        <td><span t-esc="line['name']"/></td>
+                                        <td><span t-esc="line['scheduled_date']"/></td>
+                                        <td><span t-esc="line['origin']"/></td>
                                     </tr>
                                 </t>
                             </tbody>
@@ -35,12 +38,10 @@
                             <tbody>
                                 <t t-foreach="docs" t-as="line">
                                     <t t-foreach="line.move_ids_without_package" t-as="detail">
-                                        <t t-foreach="detail.move_line_ids.sorted(key=lambda ml: ml.location_id.id)" t-as="ml">
                                             <tr>
                                                 <td><span t-field="ml.product_id.display_name"/></td>
                                                 <td><span t-field="ml.product_uom_qty"/></td>
                                             </tr>
-                                        </t>
                                     </t>
                                 </t>
                             </tbody>

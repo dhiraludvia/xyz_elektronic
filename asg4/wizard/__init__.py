@@ -1,2 +1,2 @@
 from . import inventory_bookingwz
-from . import inventory_bookingwz_xlsx
+# from . import inventory_bookingwz_xlsx

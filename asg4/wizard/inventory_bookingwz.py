@@ -16,7 +16,7 @@ class ReportInventoryBookingWz(models.TransientModel):
         if to_dateorder:
             report += [('scheduled_date','<=',to_dateorder)]
         new_report = self.env['stock.picking'].search_read(report)
-        detail_report = self.env['stock.picking'].search_read([])
+        detail_report = self.env['stock.picking'].search_read(report)
 
         data = {
             'form' : self.read(0),
