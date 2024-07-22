@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError, UserError
 
 class OrderLine(models.Model):
@@ -20,17 +20,23 @@ class OrderLine(models.Model):
                 record.product_uom_qty = record.qty_booking
                 record.product_template_id.qty_order_line = record.qty_booking     
 
-    # Not yet active
-    @api.constrains('order_line')
-    def _check_booking_order_limit(self):
-        config = self.env['booking.configuration'].search([[(self.product_template_id, '=', 'id')]])
-        if config:
-            for order in self:
-                max_qty = self.product_template_id.qty_available * self.product_template_id.qty_limit / 100
-                if order.product_template_id.qty_booking > max_qty :
-                    raise ValidationError('Total booking quantity for this product has reached the maximum limit.')
-
-
     
-    
+    @api.onchange('order_id.is_booking', 'price_unit', 'product_id')
+    def _onchange_is_booking(self):
+        for line in self:
+            if line.product_id:
+                price = line.product_id.list_price
+                if line.order_id.is_booking:
+                    line.price_unit = price * 1.1
+                else:
+                    line.price_unit = price
+            
+                
+    @api.constrains('product_uom_qty')
+    def _check_product_uom_qty(self):
+        for record in self:
+            if record.product_id and record.product_id.qty_available == 0:
+                raise ValidationError(_('Booking for "%s" currently out of stock. Please make a Request for Purchase first.') % record.product_id.name)
+            elif record.product_id and record.product_uom_qty > record.product_id.qty_available:
+                raise ValidationError(_('Booking for "%s" reaching the maximum quantity limit. please reduce the order.') % record.product_id.name)
 
