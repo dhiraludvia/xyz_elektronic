@@ -36,7 +36,18 @@
             <field name="perm_write" eval="False"/>
             <field name="perm_create" eval="True"/>
             <field name="perm_unlink" eval="False"/>
-            <field name="domain_force">['|',('company_id', 'in', company_ids),('user_id', '=', user.id)]</field>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+        </record>
+
+        <record id="inventory_admin_rule" model="ir.rule">
+            <field name="name">Admin can see all record</field>
+            <field name="model_id" ref="stock.model_stock_picking"/>
+            <field name="groups" eval="[(4, ref('group_stock_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="domain_force">[]</field>
         </record>
 
         <!-- Revoke noupdate change -->

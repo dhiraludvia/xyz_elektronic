@@ -39,13 +39,24 @@
             <field name="domain_force">[('user_id', '=', user.id)]</field>
         </record>
 
+        <record id="purchase_admin_rule" model="ir.rule">
+            <field name="name">Admin can see all record</field>
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="groups" eval="[(4, ref('group_purchase_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="domain_force">[]</field>
+        </record>
+
         <!-- Revoke noupdate change -->
         <function name="write" model="ir.model.data">
             <function name="search" model="ir.model.data">
                 <value
                     eval="[('module', '=', 'purchase'), ('name', '=', 'purchase_order_comp_rule')]" />
             </function>
-            <value eval="{'noupdate': False}"/>
+            <value eval="{'noupdate': True}"/>
         </function>
 
     </data>

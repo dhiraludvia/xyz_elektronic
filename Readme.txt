@@ -18,15 +18,15 @@ To increase efficiency, the company wants to add a Booking Order feature to mana
 - Final Exam module contain Groups for Sales, Booking Order, Purchase, and Inventory module.
     Booking Order security and rule are under Sales Groups.
     1. Customer Sales, Purchase, Inventory
-        - Only see his record (Still process for Purchase and Inventory)
+        - Only see his record
         - Only see specific menu
         - Can't see Unit Price field
-        - Can't see Salesperson (in Sales) / Purchase Representative (in Purchase) / .
+        - Can't see Salesperson (in Sales) / Purchase Representative (in Purchase) / Resposible (in Inventory).
 
     2. Admin Sales, Purchase, Inventory
-        - Can see all record (Still process for Purchase and Inventory)
+        - Can see all record
         - Only see specific menu
         - Can't see Unit Price field
 
     3. Manager Sales, Purchase, Inventory 
-        - Can manage all record (Still process for Purchase and Inventory)
+        - Can manage all record
