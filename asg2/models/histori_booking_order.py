@@ -8,10 +8,13 @@ class HistoryBookingOrder(models.Model):
 
     def _cancel_unprocessed_booking(self):
         booking_to_cancel = self.search([
+            ('state', '=', 'draft'),
             ('is_booking', '=', True),
             ('date_order', '<=', fields.Datetime.to_string(fields.Datetime.now() - timedelta(days=3)))
         ])
-        booking_to_cancel.action_cancel()
+        for record in booking_to_cancel:
+            record.action_cancel()
+
 
     def action_convert_to_rfq(self):
         for record in self:

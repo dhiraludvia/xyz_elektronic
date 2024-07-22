@@ -25,7 +25,7 @@
         <field name="inherit_id" ref="sale.view_sales_order_filter"/>
         <field name="arch" type="xml">
               <xpath expr="//filter[@name='my_sale_orders_filter']" position="after">
-                <filter string="Booking Orders Today" name="booking_order_today" domain="[('date_order', '&lt;', (time.strftime('%%Y-%%m-%%d 23:59:59')))]"/>
+                <filter string="Booking Orders Today" name="booking_order_today" domain="[('date_order', '&lt;', (time.strftime('%%Y-%%m-%%d 23:59:59'))),('date_order', '&gt;=', ((datetime.date.today() - datetime.timedelta(days=1)).strftime('%%Y-%%m-%%d 00:00:00')))]"/>
                 <filter string="Last 3 Days" name="filter_last_3_days" domain="[('date_order', '&gt;=', (datetime.datetime.today() + datetime.timedelta(days=3)))]"/>
             </xpath>
         </field>

@@ -8,7 +8,7 @@
         <field name="res_model">sale.order</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('is_booking','=',True)]</field>
-        <field name="context"></field>
+        <field name="context">{'create': False}</field>
     </record>
 
     <menuitem id="history_booking_order_menu_act" 
