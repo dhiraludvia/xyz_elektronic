@@ -21,7 +21,7 @@ class OrderLine(models.Model):
                 record.product_template_id.qty_order_line = record.qty_booking     
 
     
-    @api.onchange('order_id.is_booking', 'price_unit', 'product_id')
+    @api.onchange('product_id', 'qty_booking', 'price_unit')
     def _onchange_is_booking(self):
         for line in self:
             if line.product_id:

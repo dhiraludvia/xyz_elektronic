@@ -36,13 +36,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <t t-foreach="docs" t-as="line">
-                                    <t t-foreach="line.move_ids_without_package" t-as="detail">
+                                <t t-foreach="detail_report" t-as="line">
+                                    <!-- <t t-foreach="line.move_ids_without_package" t-as="detail"> -->
                                             <tr>
-                                                <td><span t-field="ml.product_id.display_name"/></td>
-                                                <td><span t-field="ml.product_uom_qty"/></td>
+                                                <td><span t-field="line.product_id.display_name"/></td>
+                                                <td><span t-field="line.product_uom_qty"/></td>
                                             </tr>
-                                    </t>
+                                    <!-- </t> -->
                                 </t>
                             </tbody>
                         </table>
